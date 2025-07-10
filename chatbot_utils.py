@@ -410,16 +410,16 @@ def execute_sql_query(conn, query):
 
 def analyze_sql_query(user_question, tabular_answer, llm):
     template_prompt = PromptTemplate(template="""
-        You are an experinced data analyst specialised in risk analytics domain. Below is the user's question:
+        You are an experienced Risk Management Analyst specialised in risk analytics domain. Below is the user's question:
         Question: {question}
         
-        And here is the answer given in tabular format obtained by running an SQL query:
-        Tabular Answer: {tabular_answer}
+        And here is the tabular answer given by LLM model:
+        Answer: {conv_answer}
 
-        1. Please provide accurate and relevant answer to users question.
-        2. Provide a conversational answer as concise analysis or summary of the results in bullet points or a short sentence.
-        3. Please do not hallucinate and be specific with answers.
-        4. Please don't ask users any addtional questions but only provide accurate answer.
+        Instructions:
+        1. Think like a risk analyst and provide recommendations on the data.
+        2. Use your knowledge along with above data to provide recommendations.
+        3. Dont hallucinate strictly base recommendations on the data retreived from tabular answer provided only.
         
          
         """, input_variables=["question", "tabular_answer"])
